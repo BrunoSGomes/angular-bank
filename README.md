@@ -1,3 +1,2 @@
-# Angular Project
-
-Esse projeto foi desenvolvido através da rota de cursos de angular do alura.
+# angular-bank
+Transfer application in angular with HTTP request API REST
