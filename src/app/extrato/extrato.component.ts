@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransferenciaService } from '../services/transferencia.service';
-import { transferWithDate } from '../utils/interface';
+import { transferInterface } from '../utils/interface';
 
 @Component({
   selector: 'app-extrato',
@@ -8,11 +8,15 @@ import { transferWithDate } from '../utils/interface';
   styleUrls: ['./extrato.component.scss']
 })
 export class ExtratoComponent implements OnInit {
-  transferHistoric!: Array<transferWithDate>
+  transferHistoric: Array<transferInterface>
 
-  constructor(private transferService: TransferenciaService) { }
+  constructor(private transferService: TransferenciaService) {
+    this.transferHistoric = []
+  }
 
   ngOnInit(): void {
-    this.transferHistoric = this.transferService.transferList
+    this.transferService.transferList().subscribe((result: Array<transferInterface>) => {
+      this.transferHistoric = result
+    })
   }
 }

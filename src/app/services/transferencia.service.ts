@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
-import { transferInterface, transferWithDate } from '../utils/interface';
-import { Transfer } from '../models/transferencia.model'
+import { HttpClient } from '@angular/common/http';
+import { transferInterface } from '../utils/interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransferenciaService {
 
-  transferHistoric: transferWithDate[]
+  transferHistoric: transferInterface[]
+  url = 'http://localhost:3000/transferencias'
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.transferHistoric = []
   }
 
-  get transferList() {
-    return this.transferHistoric
+  transferList(): Observable<Array<transferInterface>> {
+    return this.httpClient.get<Array<transferInterface>>(this.url)
   }
 
-  transferAdd($event: transferInterface) {
-    const uniqTransfer = { ...$event, data: new Date() }
-    this.transferHistoric.push(uniqTransfer)
+  transferAdd(transfer: transferInterface): Observable<transferInterface> {
+    const uniqTransfer = { ...transfer, data: new Date() }
+    return this.httpClient.post<transferInterface>(this.url, uniqTransfer)
   }
 
 }

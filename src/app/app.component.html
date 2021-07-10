@@ -1,3 +1,7 @@
-<app-nova-transferencia (onTransfer)="transfer($event)"></app-nova-transferencia>
-
-<app-extrato></app-extrato>
+<header>
+    <a routerLink="extrato">Angular Bank</a>
+    <a routerLink="nova-transferencia" routerLinkActive="ativo">Nova transferência</a>
+</header>
+<main>
+    <router-outlet></router-outlet>
+</main>

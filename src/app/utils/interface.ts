@@ -1,8 +1,6 @@
 export interface transferInterface {
-    valor: number,
-    destino: number
-}
-
-export interface transferWithDate extends transferInterface {
-    data: Date
+    id?: number | string
+    valor: number
+    destino: number | string
+    data?: Date
 }
